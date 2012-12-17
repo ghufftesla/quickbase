@@ -13,7 +13,7 @@ module Quickbase
     def self.generate_fields(fields)
       fields.map{|key,value|
         field = "<field "
-        fid = (key =~ /^[-+]?[0-9]+$/) ? field.concat('fid="'+key.to_s+'"') : field.concat('name="'+key.to_s+'"')
+        fid = (key =~ /^[-+]?[0-9]+$/) ? field.concat('fid="'+key.to_s+'"') : field.concat('name="'+key.to_s.gsub(/ /, '_') +'"')
         field.concat(">#{value}</field>")
       }
     end
