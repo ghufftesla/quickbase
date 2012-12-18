@@ -4,6 +4,7 @@ module Quickbase
       attr_writer :username, :password, :hours, :apptoken, :dbid, :org
     end
     attr_reader :username, :password, :hours, :apptoken, :dbid, :org, :fields
+    @http = nil
 
     def self.expectant_reader(*attributes)
       attributes.each do |attribute|
@@ -36,7 +37,8 @@ module Quickbase
     end
 
     def http
-      Quickbase::HTTP.new(instantiate)
+      return @http if @http
+      @http = Quickbase::HTTP.new(instantiate)
     end
 
     def api
