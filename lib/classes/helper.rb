@@ -27,7 +27,7 @@ module Quickbase
 
     def self.element_content(xml_node, element_name)
       element = xml_node.xpath(element_name)
-      return element.first.content unless element.nil?
+      return element.first.content unless element.nil? or element.first.nil?
       nil
     end
 
