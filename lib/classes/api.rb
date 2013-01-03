@@ -50,8 +50,9 @@ module Quickbase
     end
 
     # Documentation at http://www.quickbase.com/api-guide/add_record.html
-    def add_record(fields)
+    def add_record(fields, options = {})
       fields = Quickbase::Helper.generate_fields(fields)
+      fields << Quickbase::Helper.hash_to_xml(options)
       connection.http.post("API_AddRecord", fields)
     end
 
