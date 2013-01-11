@@ -86,8 +86,4 @@ module Quickbase
     end
 
   end
-
-  class Api < API
-    puts "Class Api will be deprecated. Please use API instead."
-  end
 end
