@@ -2,7 +2,7 @@ module Quickbase
   class HTTP
     include HTTParty
     attr_accessor :qb_params
-  
+
     def initialize(config)
       self.class.base_uri "https://#{config[:org]}.quickbase.com"
       instance_variable_set "@qb_params", {:dbid => "main"}
@@ -11,7 +11,7 @@ module Quickbase
       qb_params[:apptoken] = config[:apptoken]
       qb_params[:dbid] = config[:dbid]
     end
-      
+
     def post(quickbase_action, params = [])
       params = params.concat(Quickbase::Helper.hash_to_xml(qb_params))
       clean_xml_string = Quickbase::Helper.generate_xml(params).to_s
@@ -22,9 +22,9 @@ module Quickbase
       error_handler(response)
       response
     end
-  
+
     private
-    
+
     def error_handler(response)
       case response.xpath("//errcode").first.content.to_i
       when 0
@@ -36,9 +36,5 @@ module Quickbase
         return false
       end
     end
-  end
-  
-  class Http < HTTP
-    puts "Class Http will be deprecated. Please use HTTP instead."
   end
 end
